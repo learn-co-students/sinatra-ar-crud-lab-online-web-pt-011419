@@ -1,4 +1,4 @@
-<form method = "POST" action = "/articles"> 
-<h1> Index Form</h1>
-<input type = "submit" value = "submit">
-</form>
+<% @articles.each do |article|  %>
+<h1>  <%= article.title %> </h1>
+<h2>  <%=article.content %></h2>
+ <% end %>
