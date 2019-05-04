@@ -1,0 +1,10 @@
+<form>
+  <h1>Article Archive</h1>
+  <p>
+    <% @articles.each do |article| %>
+      <%= article.title %>
+      <%= article.content%>
+      <br>
+    <% end %>
+  </p>
+</form>
