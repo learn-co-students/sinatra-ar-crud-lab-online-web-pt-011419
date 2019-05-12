@@ -13,9 +13,15 @@ class ApplicationController < Sinatra::Base
   
   get '/articles' do #index shows all of the objects
     @articles = Article.all
+    erb :index
   end
   
   get '/articles/new' do
     erb :new
   end
+  
+  post '/article' do 
+    "This post request is working"
+  end
 end
+
