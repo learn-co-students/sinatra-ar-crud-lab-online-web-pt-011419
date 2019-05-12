@@ -7,17 +7,24 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
   end
-
-  get '/' do
-  end
   
   get '/articles' do #index shows all of the objects
     @articles = Article.all
     erb :index
   end
   
+  
   get '/articles/new' do
     erb :new
+  end
+  
+  post '/article' do 
+    @article = Article.new
+    @article.title = params[:title]
+    @article.content = params[:content]
+    @article.save
+    @article
+    redirect "/articles/#{@article.id}"
   end
   
   get '/articles/:id/edit' do 
@@ -32,19 +39,18 @@ class ApplicationController < Sinatra::Base
   
   patch '/articles/:id' do 
     @article = Article.find(params[:id])
-    @article.title = params[:article][:title]
-    @article.content = params[:article][:content]
-    @article.save
-    redirect "/articles/#{@article.id}"
-  end
-  
-  post '/article' do 
-    @article = Article.new
     @article.title = params[:title]
     @article.content = params[:content]
     @article.save
     @article
     redirect "/articles/#{@article.id}"
+  end
+  
+  delete '/articles/:id' do 
+    @article = Article.find(params[:id])
+    @article.destroy
+    
+    redirect '/articles'
   end
   
 
