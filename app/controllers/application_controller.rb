@@ -20,8 +20,18 @@ class ApplicationController < Sinatra::Base
     erb :new
   end
   
+  get '/articles/:id' do 
+    @article = Article.find(params[:id])
+    erb :show
+  end 
+  
   post '/article' do 
-    "This post request is working"
+    @article = Article.new
+    @article.title = params[:title]
+    @article.content = params[:content]
+    @article.save
+    
+    redirect "/articles/#{@article.id}"
   end
 end
 
